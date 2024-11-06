@@ -1,0 +1,93 @@
+/* Estilos para centrar la tarjeta de registro */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('../../assets/cerca-veterinario-cuidando-mascota_23-2149143883.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Filtro oscuro en toda la pantalla */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Capa de oscurecimiento */
+    z-index: -1; /* Detrás del contenido */
+}
+
+/* Estilos para la tarjeta de registro */
+.card-body {
+    background-color: rgba(17, 17, 17, 0.7); /* Fondo suave para la tarjeta */
+    padding: 50px; /* Aumenta el padding para hacer la tarjeta más espaciosa */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    width: 100%; /* Ancho total de la columna */
+    max-width: 600px; /* Aumenta el ancho máximo de la tarjeta */
+    color: #ffffff; /* Color de texto blanco */
+    z-index: 1; /* Para asegurarse de que la tarjeta esté por encima del fondo */
+}
+
+/* Título de la tarjeta */
+h1 {
+    text-align: center;
+    margin-bottom: 30px; /* Aumenta el espacio debajo del título */
+    font-family: Arial, sans-serif;
+    color: #ffffff; /* Asegúrate que el título también sea blanco */
+}
+
+/* Estilos para los campos del formulario */
+.form-group {
+    margin-bottom: 20px; /* Aumenta el espacio entre los campos */
+}
+
+.input-field {
+    width: 100%;
+    padding: 15px; /* Aumenta el padding para hacer los campos más grandes */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    color: #ffffff; /* Texto blanco en los campos */
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo transparente para los campos */
+}
+
+/* Estilos para el botón de envío */
+.btn {
+    background-color: #007bff; /* Color azul para el botón */
+    color: #ffffff;
+    padding: 15px; /* Aumenta el tamaño del botón */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 16px; /* Aumenta el tamaño de la fuente */
+}
+
+/* Hover del botón */
+.btn:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
+}
+
+/* Estilos para el mensaje de error de contraseña */
+.error-alert {
+    color: #d9534f;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .card-body {
+        max-width: 90%; /* Reduce el ancho máximo de la tarjeta en pantallas pequeñas */
+    }
+}

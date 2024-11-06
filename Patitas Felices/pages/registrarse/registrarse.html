@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up PATITAS FELICES</title>
+    <link rel="stylesheet" href="registrarse.css"> 
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var errorAlert = document.getElementById("error-alert");
+            
+            errorAlert.style.display = "none";
+
+            if (password !== confirmPassword) {
+                errorAlert.innerText = "Las contraseñas no coinciden. Por favor, inténtalo de nuevo.";
+                errorAlert.style.display = "block";
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="left-panel">
+        <div class="card-body">
+            <h1>Registro</h1>
+            <div id="error-alert" class="error-alert" style="display: none;"></div> <!-- Mensaje de error -->
+            <form action="registrarse.php" method="post" onsubmit="return validatePassword();">
+                <div class="form-group">
+                    <input type="text" placeholder="Nombre de usuario" class="input-field" name="nombre">
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email address" class="input-field" name="email">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Teléfono" class="input-field" name="telefono">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" class="input-field" name="password" id="password">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Confirm Password" class="input-field" name="confirmPassword" id="confirmPassword">
+                </div>
+                <button class="btn" type="submit">Sign up</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

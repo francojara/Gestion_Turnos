@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="IngresoTurno.css">
+    <title>Calendario de Turnos</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Calendario de Turnos</h1>
+        <div class="month-navigation">
+            <button id="prevMonth" class="btn btn-primary" disabled>&lt; Anterior</button>
+            <div id="currentMonth" class="header"></div>
+            <button id="nextMonth" class="btn btn-primary">Siguiente &gt;</button>
+        </div>
+        <div class="calendar" id="calendar"></div>
+        <button class="btn btn-success mt-3" id="saveDates">Guardar Fechas</button>
+    </div>
+
+    <script>
+        let currentDate = new Date();
+        const today = new Date();
+        const diasEspecificos = [5, 10, 15]; // Días específicos en los que se pueden colocar turnos
+
+        function createCalendar() {
+            const month = currentDate.getMonth();
+            const year = currentDate.getFullYear();
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            const calendarElement = document.getElementById('calendar');
+            calendarElement.innerHTML = '';
+
+            // Nombre del mes y año
+            const monthNames = [
+                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
+                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+            ];
+            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+
+            // Días de la semana
+            const daysOfWeek = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+            daysOfWeek.forEach(day => {
+                const dayNameElement = document.createElement('div');
+                dayNameElement.className = 'day day-name';
+                dayNameElement.innerText = day;
+                calendarElement.appendChild(dayNameElement);
+            });
+
+            // Espacios vacíos antes del primer día del mes
+            for (let i = 0; i < firstDay; i++) {
+                const emptySlot = document.createElement('div');
+                calendarElement.appendChild(emptySlot);
+            }
+
+            // Días del mes
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'day day-number';
+                dayElement.innerText = day;
+
+                const dateToCompare = new Date(year, month, day);
+
+                // Marcar el día actual
+                if (dateToCompare.toDateString() === today.toDateString()) {
+                    dayElement.classList.add('current-day');
+                } 
+                // Días pasados
+                else if (dateToCompare < today) {
+                    dayElement.classList.add('past-day');
+                }
+                // Filtro rojo para domingos
+                if (new Date(year, month, day).getDay() === 0) { // 0 es domingo
+                    dayElement.classList.add('sunday');
+                }
+
+                // Siempre agregar borde gris oscuro a los días específicos
+                if (diasEspecificos.includes(day)) {
+                    dayElement.classList.add('turno-disponible');
+                }
+
+                // Agregar evento para seleccionar el día
+                dayElement.onclick = () => {
+                    if (!dayElement.classList.contains('past-day')) {
+                        dayElement.classList.toggle('selected');
+                    }
+                };
+
+                calendarElement.appendChild(dayElement);
+            }
+
+            // Manejar botones de navegación de mes
+            const prevButton = document.getElementById('prevMonth');
+            const nextButton = document.getElementById('nextMonth');
+            
+            const currentMonth = today.getMonth();
+            const nextMonth = currentMonth + 1;
+            
+            // Deshabilitar el botón de mes anterior si se está en el mes actual
+            prevButton.disabled = (month === currentMonth && year === today.getFullYear());
+
+            // Deshabilitar el botón de mes siguiente si se está en el mes siguiente
+            nextButton.disabled = (month === nextMonth && year === today.getFullYear());
+        }
+
+        // Función para avanzar al siguiente mes
+        document.getElementById('nextMonth').onclick = () => {
+            const nextMonth = currentDate.getMonth() + 1;
+            currentDate = new Date(currentDate.getFullYear(), nextMonth, 1);
+            createCalendar();
+        };
+
+        // Función para retroceder al mes anterior
+        document.getElementById('prevMonth').onclick = () => {
+            const prevMonth = currentDate.getMonth() - 1;
+            currentDate = new Date(currentDate.getFullYear(), prevMonth, 1);
+            createCalendar();
+        };
+
+        // Crear el calendario inicial
+        createCalendar();
+    </script>
+</body>
+</html>
