@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Reserva tu turno!</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="js/app.js"></script>
+</head>
+<body>
+<form action="php/registrar.php" method="post" class="form-register">
+	<h2 class="form-titulo">Contanos que le paso a tu mascota!</h2>
+	<div class="contenedor-inputs">
+		<input type="text" id="nombre" name="nombre" placeholder="Nombre" class="input-48" required>
+		<input type="text" id="apellido" name="apellido" placeholder="Apellido" class="input-48" required>
+		<input type="email" id="correo" name="correo" placeholder="Correo" class="input-100" required>
+		<input type="text" id="mascota" name="mascota" placeholder="Nombre de tu mascota" class="input-100" required>
+		<input type="text" id="contanos" name="Contanos" placeholder="Contanos tu problema" class="input-100"required>
+		<input type="text" id="telefono" name="telefono" placeholder="Teléfono de contacto" class="input-100" required>
+		<input type="submit" value="Enviar" class="btn-enviar">
+	</div>
+</form>
+	
+</body>
+</html>
